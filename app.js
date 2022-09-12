@@ -11,6 +11,15 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// export the API to vercel
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
+
+app.listen(5000, () => {
+  console.log("Running on port 5000.");
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
