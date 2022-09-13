@@ -23,21 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', indexRouter);
-// app.use('/shortlink', shortlinkRouter);
 app.use('/users', usersRouter);
 
-// app.get("/", (req, res) => {
-//   res.send(indexRouter);
-// });
-// app.get("/shortlink", (req, res) => {
-//   res.send(shortlinkRouter);
-// });
-// app.get("/users", (req, res) => {
-//   res.send(usersRouter);
-// });
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
