@@ -4,10 +4,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var shortlinkRouter = require('./routes/shortlink');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./api/index');
+// var shortlinkRouter = require('./routes/shortlink');
+var usersRouter = require('./api/users');
 
 var app = express();
 
@@ -17,8 +16,6 @@ app.listen(3000);
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/shortlink', shortlinkRouter);
+// app.use('/shortlink', shortlinkRouter);
 app.use('/users', usersRouter);
 
 // app.get("/", (req, res) => {

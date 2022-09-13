@@ -2,7 +2,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-const { DB_LOGIN, DB_PWD, DB_HOSTNAME, DB_NAME } = process.env;
+const { DB_URI } = process.env;
 
 const options = {
   connectTimeoutMS: 5000,
@@ -10,7 +10,7 @@ const options = {
   useUnifiedTopology: true,
 };
 mongoose.connect(
-    `mongodb+srv://${DB_LOGIN}:${DB_PWD}@${DB_HOSTNAME}/${DB_NAME}?retryWrites=true&w=majority`,
+    DB_URI,
   options,
   function (err) {
     console.log(err);
