@@ -23,7 +23,7 @@ router.post("/shortlink", async function (req, res, next) {
       const newURL = new URLModel({
         URL: req.body.URL,
         suffix: suffix,
-        owner: req.body.owner,
+        owner: req.body?.owner,
         dateCreated: Date.now(),
       });
       const savedURL = await newURL.save();
