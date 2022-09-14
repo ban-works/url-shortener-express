@@ -28,7 +28,7 @@ router.post("/shortlink", async function (req, res, next) {
         dateCreated: Date.now(),
       });
       const savedURL = await newURL.save();
-      res.status(200).json({newURL:`${DOMAIN}/${savedURL.suffix}`});
+      res.status(200).json(`${DOMAIN}/${savedURL.suffix}`);
     } catch (error) {
       res.status(500).json(error);
     }
