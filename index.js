@@ -1,7 +1,6 @@
 require('./models/connect');
 var createError = require('http-errors');
 var express = require('express');
-var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,7 +9,6 @@ var indexRouter = require('./api/index');
 var usersRouter = require('./api/users');
 
 var app = express();
-app.use(cors())
 
 // export the API to vercel
 
