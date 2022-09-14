@@ -5,6 +5,7 @@ const URLModel = require("../models/URL");
 const crypto = require("crypto");
 const { DOMAIN } = process.env;
 
+
 /* GET Homepage */
 
 router.get('/', function(req, res, next) {
@@ -27,7 +28,7 @@ router.post("/shortlink", async function (req, res, next) {
         dateCreated: Date.now(),
       });
       const savedURL = await newURL.save();
-      res.status(200).json(`${DOMAIN}/${savedURL.suffix}`);
+      res.status(200).json({newURL:`${DOMAIN}/${savedURL.suffix}`});
     } catch (error) {
       res.status(500).json(error);
     }
