@@ -9,7 +9,7 @@ const { DOMAIN } = process.env;
 /* GET Homepage */
 
 router.get('/', function(req, res, next) {
-  res.send("Service is online")
+  res.redirect(`https://create.${DOMAIN}`)
 });
 
 /* POST shortlink. */
