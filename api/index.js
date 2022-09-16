@@ -9,7 +9,7 @@ const { DOMAIN } = process.env;
 /* GET Homepage */
 
 router.get('/', function(req, res, next) {
-  res.redirect(`https://create.${DOMAIN}`)
+  res.redirect(`https://create.b-z.fr`)
 });
 
 /* POST shortlink. */
