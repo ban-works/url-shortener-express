@@ -5,30 +5,32 @@ const URLModel = require("../models/URL");
 const crypto = require("crypto");
 const { DOMAIN } = process.env;
 
-
 /* GET Homepage */
 
-router.get('/', function(req, res, next) {
-  res.redirect(`https://create.b-z.fr`)
+router.get("/", function (req, res, next) {
+  res.redirect(`https://create.b-z.fr`);
 });
 
 /* POST shortlink. */
 router.post("/shortlink", async function (req, res, next) {
-  console.log(req.body)
+  console.log(req.body);
   var httpRegex =
     /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
   if (httpRegex.test(req.body.URL)) {
     try {
-      let suffix = req.body.suffix
-      let suffixInDB
-      if (suffix){
-       suffixInDB = await URLModel.find({suffix: suffix});
-       
+      let suffix;
+      let suffixTest;
+      
+      if (req.body.suffix) {
+        suffix = req.body.suffix;
+        suffixTest = await URLModel.find({ suffix: suffix });
+        
+      } else {
+        suffix = crypto.randomBytes(3).toString("hex");
+        suffixTest = await URLModel.find({ suffix: suffix });
       }
-      else{
-        suffix = crypto.randomBytes(6).toString("hex");
-      }
-      if(suffixInDB.length == 0){
+
+      if (suffixTest.length == 0) {
         const newURL = new URLModel({
           URL: req.body.URL,
           suffix: suffix,
@@ -37,10 +39,9 @@ router.post("/shortlink", async function (req, res, next) {
         });
         const savedURL = await newURL.save();
         res.status(200).json(`${DOMAIN}/${savedURL.suffix}`);
-      } else{
-        res.status(300).json('Désolé, ce suffixe est déjà pris.')
+      } else {
+        res.status(300).json("Désolé, ce suffixe est déjà pris.");
       }
-      
     } catch (error) {
       res.status(500).json(error);
     }
